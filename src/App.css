@@ -9,21 +9,6 @@
   grid-template-rows: 80px 1fr;
   grid-gap: 10px;
 }
-header{
-  background-color: antiquewhite;
-  grid-area: h;
-}
-aside{
-  background-color: azure;
-  grid-area: a;
-}
-main{
-  background-color: darkgray;
-  grid-area: m;
-}
-header img{
-  width: 100px;
-}
-main img{
-  width:1000px;
-}
+
+
+

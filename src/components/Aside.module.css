@@ -1,0 +1,7 @@
+aside{
+  background-color: azure;
+  grid-area: a;
+}
+.item{
+  color:darkred;
+}

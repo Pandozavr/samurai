@@ -1,0 +1,10 @@
+main{
+  background-color: darkgray;
+  grid-area: m;
+}
+main img{
+  width:1000px;
+}
+.item{
+  color: darkolivegreen;
+}
