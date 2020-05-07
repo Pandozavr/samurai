@@ -1,19 +1,19 @@
 import React from 'react';
 import Style from './Main.module.css';
+import Posts from './Posts/Posts';
 
 const Main = () => {
   return (
     <main>
-      <div>
+      <div  className={Style.img} >
         <img src='https://cdn.pixabay.com/photo/2017/02/01/22/02/mountain-landscape-2031539_1280.jpg' />
       </div>
-      <div className = {Style.item} >ava + desc</div>
-      <div> 
-        posts
-      <div className = {Style.item} >new post</div>
-        <div className = {Style.item} >post 1</div>
-        <div className = {Style.item} >post 2</div>
+      <div>
+          <div>
+              <img src = 'https://trikky.ru/wp-content/blogs.dir/1/files/2019/07/17/images-1-1.jpg'/>
+          </div>
       </div>
+      <Posts />
     </main>
   )
 }
