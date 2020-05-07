@@ -6,9 +6,9 @@ const Posts = () => {
       <div> 
           <textarea></textarea>
           <button>Add</button>
-          <Post />
-          <Post />
-          <Post />
+          <Post m ='First post' />
+          <Post m ='Second post' />
+          <Post m ='Third post' />
       </div>
   )
 }
