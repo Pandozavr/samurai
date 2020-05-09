@@ -1,8 +1,8 @@
 import React from 'react';
-import Style from './Main.module.css';
+import Style from './Profile.module.css';
 import Posts from './Posts/Posts';
 
-const Main = () => {
+const Profile = () => {
   return (
     <main>
       <div  className={Style.img} >
@@ -18,4 +18,4 @@ const Main = () => {
   )
 }
 
-export default Main;
+export default Profile;

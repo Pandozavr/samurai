@@ -1,7 +1,12 @@
 aside{
   background-color: azure;
   grid-area: a;
+  padding: 10px;
 }
-.item{
-  color:darkred;
+.item a{
+  color: darkslategray;
+  text-decoration-line: none;
+}
+.item a.active{
+  color: coral;
 }

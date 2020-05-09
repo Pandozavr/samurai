@@ -10,5 +10,10 @@
   grid-gap: 10px;
 }
 
+.app-wrapper-content{
+  background-color: darkgray;
+  grid-area: m;
+}
+
 
 
