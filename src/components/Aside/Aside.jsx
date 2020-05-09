@@ -15,10 +15,10 @@ const Aside = () => {
         <NavLink activeClassName={Style.active} to='/news'>News</NavLink>
       </div>
       <div className = {Style.item}>
-        <NavLink activeClassName={Style.active} to='music'>Music</NavLink>
+        <NavLink activeClassName={Style.active} to='/music'>Music</NavLink>
       </div>
       <div className = {Style.item}>
-        <NavLink activeClassName={Style.active} to='settings'>Settings</NavLink>
+        <NavLink activeClassName={Style.active} to='/settings'>Settings</NavLink>
       </div>
     </aside>
   )
