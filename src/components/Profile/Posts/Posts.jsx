@@ -8,13 +8,14 @@ let PostData = [
 ];
 
 const Posts = () => {
+
+    let PostElements = PostData.map(p => <Post m ={p.post}/>);
+
   return (
       <div> 
           <textarea></textarea>
           <button>Add</button>
-          <Post m ={PostData[0].post}/>
-          <Post m ={PostData[1].post}/>
-          <Post m ={PostData[2].post}/>
+          {PostElements}
       </div>
   )
 }
