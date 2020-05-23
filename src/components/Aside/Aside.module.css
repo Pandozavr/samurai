@@ -10,3 +10,12 @@ aside{
 .item a.active{
   color: coral;
 }
+
+.friend{
+  padding-top: 10px;
+  display: flex;
+}
+
+.navbar{
+  margin-bottom: 50px;
+}

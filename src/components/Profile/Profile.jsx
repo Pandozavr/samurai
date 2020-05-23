@@ -13,7 +13,7 @@ const Profile = (props) => {
                 <img src='https://cdn.pixabay.com/photo/2017/02/01/22/02/mountain-landscape-2031539_1280.jpg'/>
             </div>
             <ProfileInfo/>
-            <Posts PostData={props.PostData}/>
+            <Posts PostData={props.PostData} addPost = {props.addPost}/>
         </main>
     )
 }
