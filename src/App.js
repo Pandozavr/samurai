@@ -19,8 +19,8 @@ const App = (props) => {
                 <Aside src={props.appState.Aside.Friends}/>
                 <div className='app-wrapper-content'>
                     <Route path='/profile' render={ () => <Profile
-                        PostData = {props.appState.ProfilePage.PostData}
-                        addPost = {props.addPost}
+                        ProfilePage = {props.appState.ProfilePage}
+                        dispatch = {props.dispatch}
                     /> }/>
                     <Route path='/dialogs' render={ () => <Dialogs
                         DialogData = {props.appState.DialogsPage.DialogData}
