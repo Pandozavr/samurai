@@ -1,3 +1,7 @@
+import ProfileReducer from "./profile-reducer";
+import DialogReducer from "./dialogs-reducer";
+
+
 let store = {
     _state:{
         ProfilePage: {
@@ -17,7 +21,8 @@ let store = {
             MessageData: [
                 {id:"1", message: "Hi!"},
                 {id:"2", message: "How are you?"},
-            ]
+            ],
+            newMessageText: "enter your text"
         },
         Aside: {
             Friends:[
@@ -39,21 +44,14 @@ let store = {
     },
 
     dispatch(action) {
-        if (action.type === "ADD-POST"){
-            let newPost = {
-                id:"4",
-                post: this._state.ProfilePage.writingText
-            }
-            this._state.ProfilePage.PostData.push(newPost);
-            this._state.ProfilePage.writingText = "";
-            this._callSubscriber();
-        } else if (action.type === "WRITING-TEXT-POST"){
-            this._state.ProfilePage.writingText = action.text;
-            this._callSubscriber();
-        }
+
+        this._state.ProfilePage = ProfileReducer(this._state.ProfilePage, action);
+        this._state.DialogsPage = DialogReducer(this._state.DialogsPage, action);
+
+        this._callSubscriber();
+
     }
 
 };
-
 
 export default store;

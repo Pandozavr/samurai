@@ -1,19 +1,20 @@
 import React, {createRef} from "react";
 import Post from "./Post";
+import {addPostActionCreator, writtingTextActionCreator} from "../../../redux/profile-reducer";
 
 const Posts = (props) => {
 
     let PostElements = props.ProfilePage.PostData.map(p => <Post m ={p.post}/>);
 
     let addPost = () => {
-        props.dispatch({type: "ADD-POST"});
+        props.dispatch(addPostActionCreator());
     }
 
     let newPostElement = React.createRef();
 
     let onChangeText = () => {
         let text = newPostElement.current.value;
-        props.dispatch({type: "WRITING-TEXT-POST", text: text});
+        props.dispatch(writtingTextActionCreator(text));
     }
 
   return (
