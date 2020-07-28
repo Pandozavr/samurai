@@ -1,7 +1,16 @@
 const ADD_POST = "ADD-POST";
 const WRITTING_TEXT_POST = "WRITING-TEXT-POST";
 
-const ProfileReducer = (state, action) => {
+let intialState = {
+    PostData: [
+        {id:"1", post:"First post"},
+        {id:"2", post:"Second post"},
+        {id:"3", post:"Third post"}
+    ],
+    writingText: "enter your text"
+};
+
+const ProfileReducer = (state = intialState, action) => {
 
     switch (action.type) {
         case ADD_POST:

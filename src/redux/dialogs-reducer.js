@@ -1,7 +1,20 @@
 const ADD_MESSAGE = "ADD-MESSAGE";
 const WRITTING_TEXT_MESSAGE = "WRITING-TEXT-MESSAGE";
 
-const DialogReducer = (state,action) => {
+let initialState = {
+    DialogData: [
+        {id:"1", name: "Grizz"},
+        {id:"2", name: "Panda"},
+        {id:"3", name: "Chloe"},
+    ],
+    MessageData: [
+        {id:"1", message: "Hi!"},
+        {id:"2", message: "How are you?"},
+    ],
+    newMessageText: "enter your text"
+};
+
+const DialogReducer = (state = initialState,action) => {
 
     switch (action.type) {
         case ADD_MESSAGE:

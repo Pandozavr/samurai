@@ -3,16 +3,17 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import ReactDOM from "react-dom";
 import App from "./App";
-import store from "./redux/state";
+import store from "./redux/redux-store";
+import {Provider} from "react-redux";
+
 
 
 let rerenderTree = () => {
     ReactDOM.render(
         <React.StrictMode>
-            <App
-                appState = {store.getState()}
-                dispatch = {store.dispatch.bind(store)}
-            />
+            <Provider store={store}>
+                <App/>
+            </Provider>
         </React.StrictMode>,
         document.getElementById('root')
     );
