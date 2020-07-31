@@ -1,7 +1,6 @@
 import React from 'react';
 import Style from './Aside.module.css';
 import {NavLink} from "react-router-dom";
-import DialogItem from "../Dialogs/DialogItem/DialogItem";
 import FriendsItem from "./Friends/Friends";
 
 const Aside = (props) => {
