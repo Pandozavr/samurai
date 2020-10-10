@@ -20,6 +20,9 @@ const Aside = (props) => {
                     <NavLink activeClassName={Style.active} to='/news'>News</NavLink>
                 </div>
                 <div className={Style.item}>
+                    <NavLink activeClassName={Style.active} to='/find_friend'>Find Friend</NavLink>
+                </div>
+                <div className={Style.item}>
                     <NavLink activeClassName={Style.active} to='/music'>Music</NavLink>
                 </div>
                 <div className={Style.item}>
