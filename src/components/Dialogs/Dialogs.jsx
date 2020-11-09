@@ -11,6 +11,7 @@ const Dialogs = (props) => {
     let DialogsElements = props.DialogData.map(d => <DialogItem name={d.name} id={d.id}/> );
     let MessageElements = props.MessageData.map(m => <MessageItem message={m.message}/> );
 
+
     let message = React.createRef();
 
     let onChangeText = () => {

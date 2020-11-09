@@ -2,3 +2,7 @@
     width: 150px;
     height: 150px;
 }
+
+.SelectedPage{
+    font-weight: bold;
+}
