@@ -3,12 +3,14 @@ const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
 const CURRENT_PAGE = "CURRENT_PAGE";
 const TOTAL_USERS_COUNT = "TOTAL_USERS_COUNT";
+const FETCHING = "FETCHING";
 
 let intialState = {
     users: [],
     pageSize: 100,
     totalUsersCount: 0,
-    currentPage: 1
+    currentPage: 1,
+    isFetching: false
 };
 
 const FindFriendReducer = (state = intialState, action) => {
@@ -44,46 +46,56 @@ const FindFriendReducer = (state = intialState, action) => {
         case TOTAL_USERS_COUNT: {
             return {...state, totalUsersCount: action.count}
         }
+        case FETCHING: {
+            return {...state, isFetching: action.value}
+        }
 
         default:
             return state;
     }
 
-}
+};
 
-export const followAC = (userID) => {
+export const follow = (userID) => {
     return {
         type: FOLLOW,
         userID
     }
-}
+};
 
-export const unfollowAC = (userID) => {
+export const unfollow = (userID) => {
     return {
         type: UNFOLLOW,
         userID
     }
-}
+};
 
-export const setUsersAC = (users) => {
+export const setUsers = (users) => {
     return {
         type: SET_USERS,
         users
     }
-}
+};
 
-export const setCurrentPageAC = (currentPage) => {
+export const setCurrentPage = (currentPage) => {
     return {
         type: CURRENT_PAGE,
         currentPage
     }
-}
+};
 
-export const setTotalUsersCountAC = (TotalUsersCount) => {
+export const setTotalUsersCount = (TotalUsersCount) => {
     return {
         type: TOTAL_USERS_COUNT,
         count: TotalUsersCount
     }
-}
+};
+
+export const setFetchingValue = (value) => {
+    return {
+        type: FETCHING,
+        value: value
+    }
+};
 
 export default FindFriendReducer;

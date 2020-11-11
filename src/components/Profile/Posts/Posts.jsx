@@ -1,5 +1,6 @@
 import React, {createRef} from "react";
 import Post from "./Post";
+import {writingText} from "../../../redux/profile-reducer";
 
 const Posts = (props) => {
 
@@ -14,7 +15,7 @@ const Posts = (props) => {
 
     let onChangeText = () => {
         let text = newPostElement.current.value;
-        props.updatePostText(text);
+        props.writingText(text);
     }
 
   return (

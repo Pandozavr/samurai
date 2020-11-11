@@ -1,5 +1,5 @@
 import React, {createRef} from "react";
-import {addPostActionCreator, writtingTextActionCreator} from "../../../redux/profile-reducer";
+import {addPost, writingText} from "../../../redux/profile-reducer";
 import Posts from "./Posts";
 import {connect} from "react-redux";
 
@@ -8,9 +8,9 @@ const mapStateToProps = (state) => {
     return {
         ProfilePage: state.ProfilePage
     }
-}
+};
 
-const mapDispatchToProps = (dispatch) => {
+/*const mapDispatchToProps = (dispatch) => {
     return {
         updatePostText: (text) => {
             dispatch(writtingTextActionCreator(text))
@@ -19,8 +19,10 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(addPostActionCreator())
         }
     }
-}
+};*/
 
-const PostsContainer = connect(mapStateToProps, mapDispatchToProps)(Posts);
+
+
+const PostsContainer = connect(mapStateToProps, {addPost, writingText} )(Posts);
 
 export default PostsContainer;

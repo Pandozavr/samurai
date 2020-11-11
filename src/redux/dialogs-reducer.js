@@ -41,14 +41,14 @@ const DialogReducer = (state = initialState,action) => {
 
 }
 
-export const addMessageDialogActionCreator = () => {
+export const addMessageDialog = () => {
 
     return {
         type: ADD_MESSAGE
     }
 }
 
-export const onChangeMessageDialogActionCreator = (text) => {
+export const onChangeMessageDialog = (text) => {
 
     return {
         type: WRITTING_TEXT_MESSAGE,
