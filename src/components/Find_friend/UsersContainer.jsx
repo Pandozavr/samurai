@@ -10,24 +10,26 @@ import {
 import * as axios from "axios";
 import FindFriend from "./FindFriend";
 import Preloader from "../common/preloader";
+import {usersAPI} from "../../API(DAL)/api";
+
 
 
 class FF_Container extends React.Component {
 
     componentDidMount() {
         this.props.setFetchingValue(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
             this.props.setFetchingValue(false);
-            this.props.setUsers(response.data.items);
-            this.props.setTotalUsersCount(response.data.totalCount);
+            this.props.setUsers(data.items);
+            this.props.setTotalUsersCount(data.totalCount);
         });
     }
 
     onPageChanged = (pageNamber) => {
         this.props.setFetchingValue(true);
         this.props.setCurrentPage(pageNamber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNamber}&count=${this.props.pageSize}`).then(response => {
-            this.props.setUsers(response.data.items);
+        usersAPI.getUsers(pageNamber, this.props.pageSize).then(data => {
+            this.props.setUsers(data.items);
             this.props.setFetchingValue(false);
         });
     };
