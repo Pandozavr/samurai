@@ -1,16 +1,20 @@
+import {usersAPI} from "../API(DAL)/api";
+
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
 const CURRENT_PAGE = "CURRENT_PAGE";
 const TOTAL_USERS_COUNT = "TOTAL_USERS_COUNT";
 const FETCHING = "FETCHING";
+const FOLLOW_PROGRESS = "FOLLOW_PROGRESS";
 
 let intialState = {
     users: [],
     pageSize: 100,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: false
+    isFetching: false,
+    followingInProgress: []
 };
 
 const FindFriendReducer = (state = intialState, action) => {
@@ -48,6 +52,14 @@ const FindFriendReducer = (state = intialState, action) => {
         }
         case FETCHING: {
             return {...state, isFetching: action.value}
+        }
+        case FOLLOW_PROGRESS: {
+            return {
+                ...state,
+                followingInProgress: action.isFetching
+                    ? [...state.followingInProgress, action.userID]
+                    : state.followingInProgress.filter(id => id != action.userID)
+            }
         }
 
         default:
@@ -96,6 +108,49 @@ export const setFetchingValue = (value) => {
         type: FETCHING,
         value: value
     }
+};
+
+export const followProgress = (isFetching, userID) => {
+    return {
+        type: FOLLOW_PROGRESS,
+        isFetching,
+        userID
+    }
+};
+
+export const getUsersThunkCreator = (currentPage, pageSize) => {
+    return (dispatch) => {
+        dispatch(setFetchingValue(true));
+        usersAPI.getUsers(currentPage, pageSize).then(data => {
+            dispatch(setFetchingValue(false));
+            dispatch(setUsers(data.items));
+            dispatch(setTotalUsersCount(data.totalCount));
+        });
+    };
+};
+
+export const unFollowThunkCreator = (userID) => {
+    return (dispatch) => {
+        dispatch(followProgress(true, userID));
+        usersAPI.unfollow(userID).then(data => {
+            if(data.resultCode == 0){
+                dispatch(unfollow(userID))
+            }
+            dispatch(followProgress(false, userID));
+        });
+    };
+};
+
+export const followThunkCreator = (userID) => {
+    return (dispatch) => {
+        dispatch(followProgress(true, userID));
+        usersAPI.follow(userID).then(data => {
+            if(data.resultCode == 0){
+                dispatch(follow(userID))
+            }
+            dispatch(followProgress(false, userID));
+        });
+    };
 };
 
 export default FindFriendReducer;

@@ -3,8 +3,6 @@ import style from "./Dialogs.module.css"
 import MessageItem from "./MessageItem/MessageItem";
 import DialogItem from "./DialogItem/DialogItem";
 
-
-
 const Dialogs = (props) => {
 
 
@@ -16,13 +14,12 @@ const Dialogs = (props) => {
 
     let onChangeText = () => {
         let text = message.current.value;
-        props.onChangeText(text);
+        props.onChangeMessageDialog(text);
     }
 
     let addMessage = () => {
-        props.addMessage();
+        props.addMessageDialog();
     }
-
 
     return(
         <div className={style.dialogs}>

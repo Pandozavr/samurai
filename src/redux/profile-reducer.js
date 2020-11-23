@@ -1,6 +1,9 @@
+import {usersAPI} from "../API(DAL)/api";
+
 const ADD_POST = "ADD-POST";
 const WRITTING_TEXT_POST = "WRITING-TEXT-POST";
 const SET_USERS_PROFILE = "SET_USERS_PROFILE";
+const GET_USERS_PROFILE = "GET_USERS_PROFILE";
 
 let intialState = {
     PostData: [
@@ -61,6 +64,13 @@ export const setUsersProfile = (profile) => {
         type: SET_USERS_PROFILE,
         profile: profile
     }
+};
+
+export const getUsersProfileThunk = (userID) => (dispatch) => {
+
+    usersAPI.getProfileData(userID).then(response => {
+        dispatch(setUsersProfile(response.data));
+    });
 };
 
 export default ProfileReducer;

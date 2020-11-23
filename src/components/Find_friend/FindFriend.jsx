@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./find_friend.module.css";
 import noAvatar from "../../assets/images/noAvatar.png";
 import {NavLink} from "react-router-dom";
-import * as axios from "axios";
 
 let FindFriend = (props) => {
 
@@ -33,33 +32,12 @@ let FindFriend = (props) => {
                     </div>
                     <div>
                         {u.followed
-                            ? <button onClick={() => {
-                                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
-                                    withCredentials: true,
-                                    headers:{
-                                        "API-KEY": "556f597a-4931-4dc9-aa24-4fba87ed0759"
-                                    }
-                                }).then(response => {
-                                    if(response.data.resultCode == 0){
-                                        props.unfollow(u.id)
-                                    }
-                                });
-
-
+                            ? <button disabled={props.valueFollowingInProgress.some(id => id === u.id)} onClick={() => {
+                                props.unFollowThunkCreator(u.id);
                             }}>Unfollow</button>
-                            : <button onClick={() => {
-                                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
-                                    withCredentials: true,
-                                    headers:{
-                                        "API-KEY": "556f597a-4931-4dc9-aa24-4fba87ed0759"
-                                    }
-                                }).then(response => {
-                                    if(response.data.resultCode == 0){
-                                        props.follow(u.id)
-                                    }
-                                        });
 
-
+                            : <button disabled={props.valueFollowingInProgress.some(id => id === u.id)} onClick={() => {
+                                props.followThunkCreator(u.id);
                             }}>Follow</button>}
                     </div>
                 </span>

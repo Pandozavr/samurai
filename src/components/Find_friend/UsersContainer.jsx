@@ -1,37 +1,28 @@
 import React from "react";
 import {connect} from "react-redux";
 import {
-    follow,
-    setCurrentPage, setFetchingValue,
+    follow, followProgress, followThunkCreator, getUsersThunkCreator,
+    setCurrentPage,
     setTotalUsersCount,
     setUsers,
-    unfollow
+    unfollow, unFollowThunkCreator
 } from "../../redux/find_friend-reducer";
-import * as axios from "axios";
 import FindFriend from "./FindFriend";
 import Preloader from "../common/preloader";
-import {usersAPI} from "../../API(DAL)/api";
 
 
 
 class FF_Container extends React.Component {
 
     componentDidMount() {
-        this.props.setFetchingValue(true);
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-            this.props.setFetchingValue(false);
-            this.props.setUsers(data.items);
-            this.props.setTotalUsersCount(data.totalCount);
-        });
+        this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize);
     }
 
     onPageChanged = (pageNamber) => {
-        this.props.setFetchingValue(true);
+        this.props.getUsersThunkCreator(pageNamber, this.props.pageSize);
+
         this.props.setCurrentPage(pageNamber);
-        usersAPI.getUsers(pageNamber, this.props.pageSize).then(data => {
-            this.props.setUsers(data.items);
-            this.props.setFetchingValue(false);
-        });
+
     };
 
     render() {
@@ -44,6 +35,11 @@ class FF_Container extends React.Component {
                         users={this.props.users}
                         follow={this.props.follow}
                         unfollow={this.props.unfollow}
+                        followProgress={this.props.followProgress}
+                        valueFollowingInProgress={this.props.valueFollowingInProgress}
+                        unFollowThunkCreator={this.props.unFollowThunkCreator}
+                        followThunkCreator={this.props.followThunkCreator}
+
             />
         </>
     }
@@ -56,7 +52,8 @@ let mapStateToProps = (state) => {
         pageSize: state.FindFriendPage.pageSize,
         totalUsersCount: state.FindFriendPage.totalUsersCount,
         currentPage: state.FindFriendPage.currentPage,
-        isFetching: state.FindFriendPage.isFetching
+        isFetching: state.FindFriendPage.isFetching,
+        valueFollowingInProgress: state.FindFriendPage.followingInProgress
     }
 };
 
@@ -93,6 +90,10 @@ export default connect(mapStateToProps,
         setUsers,
         setCurrentPage,
         setTotalUsersCount,
-        setFetchingValue
+        followProgress,
+        getUsersThunkCreator,
+        unFollowThunkCreator,
+        followThunkCreator
+
     }
     )(FF_Container);
