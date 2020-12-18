@@ -1,5 +1,4 @@
 const ADD_MESSAGE = "ADD-MESSAGE";
-const WRITTING_TEXT_MESSAGE = "WRITING-TEXT-MESSAGE";
 
 let initialState = {
     DialogData: [
@@ -10,8 +9,7 @@ let initialState = {
     MessageData: [
         {id:"1", message: "Hi!"},
         {id:"2", message: "How are you?"},
-    ],
-    newMessageText: "enter your text"
+    ]
 };
 
 const DialogReducer = (state = initialState,action) => {
@@ -20,40 +18,26 @@ const DialogReducer = (state = initialState,action) => {
         case ADD_MESSAGE: {
             let newMessage = {
                 id: "3",
-                message: state.newMessageText
+                message: action.newMessageBody
             }
             let stateCopy = {
                 ...state,
-                MessageData: [...state.MessageData, newMessage],
-                newMessageText: ""
+                MessageData: [...state.MessageData, newMessage]
             };
-            return stateCopy;
-        }
-        case WRITTING_TEXT_MESSAGE: {
-            let stateCopy = {...state};
-            stateCopy.newMessageText = action.text;
             return stateCopy;
         }
         default:
             return state;
 
     }
+};
 
-}
-
-export const addMessageDialog = () => {
-
-    return {
-        type: ADD_MESSAGE
-    }
-}
-
-export const onChangeMessageDialog = (text) => {
+export const addMessageDialog = (newMessageBody) => {
 
     return {
-        type: WRITTING_TEXT_MESSAGE,
-        text: text
+        type: ADD_MESSAGE,
+        newMessageBody
     }
-}
+};
 
 export default DialogReducer;

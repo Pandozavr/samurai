@@ -1,30 +1,41 @@
-import React, {createRef} from "react";
+import React from "react";
 import Post from "./Post";
-import {writingText} from "../../../redux/profile-reducer";
+import {Field, reduxForm} from "redux-form";
+import {maxLengthCreator, required} from "../../../utils/validation_form/validators";
+import {ElementCreator} from "../../common/FormControl/FormControls";
 
-const Posts = (props) => {
+let maxLengthPost = maxLengthCreator(20);
+
+const Textarea = ElementCreator("textarea");
 
 
-    let PostElements = props.ProfilePage.PostData.map(p => <Post m ={p.post}/>);
+const Posts = React.memo( props => {
 
-    let addPost = () => {
-        props.addPost();
-    }
+    console.log("render");
 
-    let newPostElement = React.createRef();
+    let PostElements = props.PostData.map(p => <Post m ={p.post}/>);
 
-    let onChangeText = () => {
-        let text = newPostElement.current.value;
-        props.writingText(text);
-    }
+    let addNewPost = (values) => {
+        props.addPost(values.newPostText);
+    };
 
   return (
-      <div> 
-          <textarea onChange={onChangeText} value={props.ProfilePage.writingText} ref={newPostElement}></textarea>
-          <button onClick={addPost}>Add</button>
+      <div>
+          <PostFormRedux onSubmit={addNewPost} />
           {PostElements}
       </div>
   )
-}
+});
+
+const PostForm = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <Field component={Textarea} name={"newPostText"} validate={[required, maxLengthPost]}/>
+            <button>Add</button>
+        </form>
+    )
+};
+
+const PostFormRedux = reduxForm({form: "ProfilePostForm"})(PostForm);
 
 export default Posts;

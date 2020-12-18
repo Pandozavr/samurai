@@ -1,0 +1,13 @@
+.SelectedPage{
+    font-weight: bold;
+}
+.page span {
+    padding: 1px;
+    border: 1px black solid;
+    margin-left: 1px;
+    cursor: pointer;
+}
+.page{
+    margin-top: 2px;
+    text-align: center;
+}

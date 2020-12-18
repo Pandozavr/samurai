@@ -4,13 +4,12 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import PostsContainer from "./Posts/PostsContainer";
 
 const Profile = (props) => {
-
         return (
             <main>
                 <div className={Style.img}>
                     <img src='https://cdn.pixabay.com/photo/2017/02/01/22/02/mountain-landscape-2031539_1280.jpg'/>
                 </div>
-                <ProfileInfo profile={props.profile}/>
+                <ProfileInfo profile={props.profile} updateStatus={props.updateStatus} status={props.status}/>
                 <PostsContainer/>
             </main>
         )

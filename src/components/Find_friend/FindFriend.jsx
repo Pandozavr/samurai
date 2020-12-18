@@ -1,60 +1,31 @@
 import React from "react";
-import styles from "./find_friend.module.css";
-import noAvatar from "../../assets/images/noAvatar.png";
-import {NavLink} from "react-router-dom";
+import Paginator from "../common/Paginator/Paginator";
+import UserItem from "./UserItem";
 
 let FindFriend = (props) => {
 
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-
-    let pages = [];
-
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i);
-    }
-        return <div>
-            <div>
-                {pages.map(p => {
-                    return <span className={props.currentPage === p && styles.SelectedPage}
-                                 onClick={(e) => {
-                                     props.onPageChanged(p)
-                                 }}>{p}</span>
-                })}
-
-            </div>
+    return (
+        <div>
+            <Paginator
+                currentPage={props.currentPage}
+                onPageChanged={props.onPageChanged}
+                totalUsersCount={props.totalUsersCount}
+                pageSize={props.pageSize}
+            />
             {
-                props.users.map(u => <div key={u.id}>
-                <span>
-                    <div>
-                        <NavLink to={"/profile/" + u.id}>
-                            <img src={u.photos.small != null ? u.photos.small : noAvatar} className={styles.ffAvatar}/>
-                        </NavLink>
-                    </div>
-                    <div>
-                        {u.followed
-                            ? <button disabled={props.valueFollowingInProgress.some(id => id === u.id)} onClick={() => {
-                                props.unFollowThunkCreator(u.id);
-                            }}>Unfollow</button>
-
-                            : <button disabled={props.valueFollowingInProgress.some(id => id === u.id)} onClick={() => {
-                                props.followThunkCreator(u.id);
-                            }}>Follow</button>}
-                    </div>
-                </span>
-                    <span>
-                    <span>
-                        <div>{u.name}</div>
-                        <div>{u.status}</div>
-                    </span>
-                    <span>
-                        <div>{"u.location.country"}</div>
-                        <div>{"u.location.city"}</div>
-                    </span>
-                </span>
-                </div>)
+                props.users.map(u => <UserItem
+                        users={u}
+                        key={u.id}
+                        unFollowThunkCreator={props.unFollowThunkCreator}
+                        followThunkCreator={props.followThunkCreator}
+                        valueFollowingInProgress={props.valueFollowingInProgress}
+                    />
+                )
             }
         </div>
-    }
+    )
+
+};
 
 
 export default FindFriend;

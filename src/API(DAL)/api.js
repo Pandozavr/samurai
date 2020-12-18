@@ -25,7 +25,8 @@ export const usersAPI = {
         )
     },
     getProfileData(userID) {
-        return instance.get(`profile/` + userID)
+        console.log("plese use profileAPI");
+        return profileAPI.getProfileData(userID)
     },
     unfollow(id) {
         return instance.delete(`follow/${id}`).then(
@@ -41,5 +42,27 @@ export const usersAPI = {
             }
         )
     }
+};
 
+
+export const profileAPI = {
+    getProfileData(userID) {
+        return instance.get(`profile/` + userID)
+    },
+    getStatus(userID) {
+        return instance.get(`/profile/status/` + userID)
+    },
+    updateStatus(status) {
+        return instance.put(`/profile/status/`, {status: status})
+    }
+
+};
+
+export const loginAPI = {
+    login(email, password, rememberMe = false) {
+        return instance.post(`/auth/login`, {email, password, rememberMe});
+    },
+    logout() {
+        return instance.delete(`/auth/login`);
+    }
 };

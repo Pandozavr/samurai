@@ -10,7 +10,7 @@ const FOLLOW_PROGRESS = "FOLLOW_PROGRESS";
 
 let intialState = {
     users: [],
-    pageSize: 100,
+    pageSize: 20,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
@@ -119,37 +119,34 @@ export const followProgress = (isFetching, userID) => {
 };
 
 export const getUsersThunkCreator = (currentPage, pageSize) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(setFetchingValue(true));
-        usersAPI.getUsers(currentPage, pageSize).then(data => {
+        let data = await usersAPI.getUsers(currentPage, pageSize)
             dispatch(setFetchingValue(false));
             dispatch(setUsers(data.items));
             dispatch(setTotalUsersCount(data.totalCount));
-        });
     };
 };
 
 export const unFollowThunkCreator = (userID) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(followProgress(true, userID));
-        usersAPI.unfollow(userID).then(data => {
+        let data = await usersAPI.unfollow(userID)
             if(data.resultCode == 0){
                 dispatch(unfollow(userID))
             }
             dispatch(followProgress(false, userID));
-        });
     };
 };
 
 export const followThunkCreator = (userID) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(followProgress(true, userID));
-        usersAPI.follow(userID).then(data => {
+        let data = await usersAPI.follow(userID)
             if(data.resultCode == 0){
                 dispatch(follow(userID))
             }
             dispatch(followProgress(false, userID));
-        });
     };
 };
 

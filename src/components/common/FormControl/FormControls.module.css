@@ -1,0 +1,12 @@
+.error{
+    border: 3px solid red;
+}
+
+.red{
+    color:red;
+}
+
+.for_Error{
+    border: 3px solid brown;
+    color: brown;
+}

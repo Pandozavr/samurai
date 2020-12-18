@@ -9,6 +9,14 @@ import {
 } from "../../redux/find_friend-reducer";
 import FindFriend from "./FindFriend";
 import Preloader from "../common/preloader";
+import {
+    getCurrentPage,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers,
+    getValueFollowingInProgress
+} from "../../redux/usersSelectors";
 
 
 
@@ -46,7 +54,7 @@ class FF_Container extends React.Component {
 
 }
 
-let mapStateToProps = (state) => {
+/*let mapStateToProps = (state) => {
     return {
         users: state.FindFriendPage.users,
         pageSize: state.FindFriendPage.pageSize,
@@ -54,6 +62,17 @@ let mapStateToProps = (state) => {
         currentPage: state.FindFriendPage.currentPage,
         isFetching: state.FindFriendPage.isFetching,
         valueFollowingInProgress: state.FindFriendPage.followingInProgress
+    }
+};*/
+
+let mapStateToProps = (state) => {
+    return {
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        valueFollowingInProgress: getValueFollowingInProgress(state)
     }
 };
 
